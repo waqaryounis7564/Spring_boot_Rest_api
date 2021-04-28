@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.SenatorController;
 import com.example.demo.entity.SenatorFiling;
 import com.example.demo.entity.SenatorTrades;
 import com.example.demo.util.ParameterUtils;
@@ -13,6 +14,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.util.List;
 
 @Service
 public class SenatorData {
-
+    private static final Logger logger = LoggerFactory.getLogger(SenatorData.class);
 
     public JSONObject scrapeData(boolean isFullRun) throws IOException {
         JSONObject obj = new JSONObject();
@@ -171,16 +174,16 @@ public class SenatorData {
     }
 
     private void writeToDB(SenatorFiling senatorFiling) {
-        System.out.println(MessageFormat.format("{0}-----{1}", senatorFiling.getFirstName(), senatorFiling.getDateFiled()));
+        logger.error(MessageFormat.format("{0}-----{1}", senatorFiling.getFirstName(), senatorFiling.getDateFiled()));
         System.out.println("********");
         if (senatorFiling.getJpgLinks() != null) {
-            System.out.println(MessageFormat.format("Jpg links size : {0}", senatorFiling.getJpgLinks().size()));
+            logger.error(MessageFormat.format("Jpg links size : {0}", senatorFiling.getJpgLinks().size()));
         }
         System.out.println("********");
         if (senatorFiling.getSenatorTradesList() != null) {
-            System.out.println(MessageFormat.format("Senator trades size : {0}", senatorFiling.getSenatorTradesList().size()));
+            logger.error(MessageFormat.format("Senator trades size : {0}", senatorFiling.getSenatorTradesList().size()));
         }
-        System.out.println("------------------------------");
+        logger.error("------------------------------");
     }
 
 }
