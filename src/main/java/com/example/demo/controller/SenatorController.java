@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Date;
@@ -26,6 +23,11 @@ public class SenatorController {
     @Autowired
     SenatorController(SenatorData senatorData) {
         this.senatorData = senatorData;
+    }
+
+    @RequestMapping(value="user", method = RequestMethod.GET)
+    public @ResponseBody String  getItem(@RequestParam("url") String itemid){
+        return itemid;
     }
 
     @GetMapping(value = "/test/{fromPreviuosYear}/{toPreviuosYear}")
